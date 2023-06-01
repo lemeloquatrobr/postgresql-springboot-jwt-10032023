@@ -4,6 +4,7 @@ import com.empresa.postgresqlspringbootjwt10032023.repositories.CredentialReposi
 import com.empresa.postgresqlspringbootjwt10032023.models.Credential;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 @Service
 public class CredentialService {
@@ -14,6 +15,10 @@ public class CredentialService {
 
     public CredentialService(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
+    }
+
+    public List<Credential> index() {
+        return credentialRepository.findAll();
     }
 
     public void store(Credential credential) {
