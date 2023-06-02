@@ -21,6 +21,10 @@ public class CredentialService {
         return credentialRepository.findAll();
     }
 
+    public Credential getCredentialByEmail(String email) {
+        return credentialRepository.getCredentialByEmail(email);
+    }
+
     public void store(Credential credential) {
         String password = credential.getPassword();
         String bcryptPassword = passwordEncoder.encode(password);
