@@ -5,6 +5,9 @@ import com.empresa.postgresqlspringbootjwt10032023.models.Credential;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import java.util.Date;
 
 @Service
 public class CredentialService {
@@ -31,5 +34,22 @@ public class CredentialService {
         credential.setPassword(bcryptPassword);
 
         credentialRepository.save(credential);
+    }
+
+    public Boolean validatePassword(String password, String passwordByEmail) {
+        return this.passwordEncoder.matches(password, passwordByEmail);
+    }
+
+    public String generateToken(Credential credential) {
+        String email = credential.getEmail();
+
+        String token = Jwts.builder()
+            .setSubject(email)
+            .setIssuedAt(new Date())
+            .setExpiration(new Date((new Date()).getTime() + 60 * 60 * 24 * 1000))
+            .signWith(SignatureAlgorithm.HS256, "SECRET_KEY")
+            .compact();
+
+        return token;
     }
 }
