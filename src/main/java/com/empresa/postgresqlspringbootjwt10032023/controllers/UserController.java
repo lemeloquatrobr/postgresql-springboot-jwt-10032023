@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -21,15 +24,18 @@ public class UserController {
 
     @GetMapping
     public List<User> index() {
-
         List<User> users = userService.index();
-
         return users;
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> show(@PathVariable int id) {
+        User user = userService.show(id);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @PostMapping
     public void store(@RequestBody User user) {
-        // System.out.println(user.getName());
         userService.store(user);
     }
 }
