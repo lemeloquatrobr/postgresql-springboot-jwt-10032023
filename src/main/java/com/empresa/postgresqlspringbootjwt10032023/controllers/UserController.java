@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
 
 import com.empresa.postgresqlspringbootjwt10032023.services.UserService;
+import com.empresa.postgresqlspringbootjwt10032023.services.CredentialService;
 import com.empresa.postgresqlspringbootjwt10032023.models.User;
+import com.empresa.postgresqlspringbootjwt10032023.models.UserEntity;
+import com.empresa.postgresqlspringbootjwt10032023.models.Credential;
 
 @CrossOrigin
 @RestController
@@ -21,6 +24,12 @@ import com.empresa.postgresqlspringbootjwt10032023.models.User;
 public class UserController {
 
     UserService userService = new UserService();
+
+    private CredentialService credentialService;
+
+    public UserController(CredentialService credentialService) {
+        this.credentialService = credentialService;
+    }
 
     @GetMapping
     public List<User> index() {
@@ -35,7 +44,17 @@ public class UserController {
     }
 
     @PostMapping
-    public void store(@RequestBody User user) {
-        userService.store(user);
+    public void store(@RequestBody UserEntity userEntity) {
+        User user = new User();
+        user.setName(userEntity.getName());
+
+        int userIdReturned = userService.store(user);
+
+        List<Credential> credentials = userEntity.getCredentials();
+
+        for (Credential credential: credentials) {
+            credential.setUserId(userIdReturned);
+            credentialService.store(credential);
+        }
     }
 }
