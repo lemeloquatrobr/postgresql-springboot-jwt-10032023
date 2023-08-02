@@ -29,7 +29,7 @@ public class CredentialController {
     }
 
     @PostMapping
-    public void store(@RequestBody Credential credential) {
-        credentialService.store(credential);
+    public String store(@RequestBody Credential credential) {
+        return credentialService.store(credential);
     }
 }
