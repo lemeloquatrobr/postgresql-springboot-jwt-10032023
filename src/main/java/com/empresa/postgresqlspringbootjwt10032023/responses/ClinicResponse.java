@@ -1,4 +1,4 @@
-package com.empresa.postgresqlspringbootjwt10032023.models;
+package com.empresa.postgresqlspringbootjwt10032023.responses;
 
 import java.util.List;
 
