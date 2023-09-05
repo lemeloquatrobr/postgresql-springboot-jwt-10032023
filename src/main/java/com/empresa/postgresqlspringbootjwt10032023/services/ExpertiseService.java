@@ -8,9 +8,9 @@ public class ExpertiseService {
 
     ExpertiseRepository expertiseRepository = new ExpertiseRepository();
 
-    // public ExpertiseResponse index() {
-    //     return expertiseRepository.findAll();
-    // }
+    public ExpertiseResponse index() {
+        return expertiseRepository.findAll();
+    }
 
     public ExpertiseResponse store(Expertise expertise) {
         return expertiseRepository.save(expertise);

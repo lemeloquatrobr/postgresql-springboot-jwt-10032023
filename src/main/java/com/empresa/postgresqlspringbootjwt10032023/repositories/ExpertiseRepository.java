@@ -14,40 +14,39 @@ import com.empresa.postgresqlspringbootjwt10032023.responses.ExpertiseResponse;
 public class ExpertiseRepository {
     ExpertiseResponse expertiseResponse = new ExpertiseResponse();
 
-    // public ExpertiseResponse findAll() {
-    //     ExpertiseResponse expertiseResponse = new ExpertiseResponse();
-    //     List<Expertise> expertises = new ArrayList<Expertise>();
+    public ExpertiseResponse findAll() {
+        ExpertiseResponse expertiseResponse = new ExpertiseResponse();
+        List<Expertise> expertises = new ArrayList<Expertise>();
 
-    //     try {
-    //         String dbUrl = "jdbc:postgresql://localhost:5432/postgresql_springboot_jwt_10032023_db";
-    //         String dbUser = "postgres";
-    //         String dbPassword = "postgres";
-    //         String sqlQuery = "select * from expertises";
-    //         Connection connection = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
-    //         PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
-    //         ResultSet resultSet = preparedStatement.executeQuery();
+        try {
+            String dbUrl = "jdbc:postgresql://localhost:5432/postgresql_springboot_jwt_10032023_db";
+            String dbUser = "postgres";
+            String dbPassword = "postgres";
+            String sqlQuery = "select * from expertises";
+            Connection connection = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-    //         while (resultSet.next()) {
-    //             Expertise expertise = new Expertise();
-    //             expertise.setId(resultSet.getInt("id"));
-    //             expertise.setCnpj(resultSet.getString("cnpj"));
-    //             expertise.setCorporateName(resultSet.getString("corporate_name"));
-    //             expertise.setCreatedAt(resultSet.getTimestamp("created_at"));
-    //             expertise.setUpdatedAt(resultSet.getTimestamp("updated_at"));
-    //             expertises.add(expertise);
-    //         }
+            while (resultSet.next()) {
+                Expertise expertise = new Expertise();
+                expertise.setId(resultSet.getInt("id"));
+                expertise.setExpertise(resultSet.getString("expertise"));
+                expertise.setCreatedAt(resultSet.getTimestamp("created_at"));
+                expertise.setUpdatedAt(resultSet.getTimestamp("updated_at"));
+                expertises.add(expertise);
+            }
 
-    //         expertiseResponse.setExpertises(expertises);
-    //         expertiseResponse.setSqlResponse("Successfully");
-    //         expertiseResponse.setSqlExecute(true);
-    //     } catch (SQLException e) {
-    //         e.printStackTrace(System.err);
-    //         expertiseResponse.setSqlResponse(e.getMessage());
-    //         expertiseResponse.setSqlExecute(false);
-    //     }
+            expertiseResponse.setExpertises(expertises);
+            expertiseResponse.setSqlResponse("Successfully");
+            expertiseResponse.setSqlExecute(true);
+        } catch (SQLException e) {
+            e.printStackTrace(System.err);
+            expertiseResponse.setSqlResponse(e.getMessage());
+            expertiseResponse.setSqlExecute(false);
+        }
 
-    //     return expertiseResponse;
-    // }
+        return expertiseResponse;
+    }
 
     public ExpertiseResponse save(Expertise expertise) {
         try {
