@@ -20,15 +20,15 @@ public class ExpertiseController {
 
     ExpertiseService expertiseService = new ExpertiseService();
 
-    // @GetMapping
-    // public ResponseEntity<ExpertiseResponse> index() {
-    //     ExpertiseResponse expertiseResponse = expertiseService.index();
-    //     if (expertiseResponse.getSqlExecute()) {
-    //         return new ResponseEntity<ExpertiseResponse>(expertiseResponse, HttpStatus.OK);
-    //     } else {
-    //         return new ResponseEntity<ExpertiseResponse>(expertiseResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-    //     }
-    // }
+    @GetMapping
+    public ResponseEntity<ExpertiseResponse> index() {
+        ExpertiseResponse expertiseResponse = expertiseService.index();
+        if (expertiseResponse.getSqlExecute()) {
+            return new ResponseEntity<ExpertiseResponse>(expertiseResponse, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<ExpertiseResponse>(expertiseResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @PostMapping
     public ResponseEntity<ExpertiseResponse> store(@RequestBody Expertise expertise) {
