@@ -14,39 +14,39 @@ import com.empresa.postgresqlspringbootjwt10032023.responses.ExpertResponse;
 public class ExpertRepository {
     ExpertResponse expertResponse = new ExpertResponse();
 
-    // public ExpertResponse findAll() {
-    //     ExpertResponse expertResponse = new ExpertResponse();
-    //     List<Expert> experts = new ArrayList<Expert>();
+    public ExpertResponse findAll() {
+        ExpertResponse expertResponse = new ExpertResponse();
+        List<Expert> experts = new ArrayList<Expert>();
 
-    //     try {
-    //         String dbUrl = "jdbc:postgresql://localhost:5432/postgresql_springboot_jwt_10032023_db";
-    //         String dbUser = "postgres";
-    //         String dbPassword = "postgres";
-    //         String sqlQuery = "select * from experts";
-    //         Connection connection = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
-    //         PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
-    //         ResultSet resultSet = preparedStatement.executeQuery();
+        try {
+            String dbUrl = "jdbc:postgresql://localhost:5432/postgresql_springboot_jwt_10032023_db";
+            String dbUser = "postgres";
+            String dbPassword = "postgres";
+            String sqlQuery = "select * from experts";
+            Connection connection = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-    //         while (resultSet.next()) {
-    //             Expert expert = new Expert();
-    //             expert.setId(resultSet.getInt("id"));
-    //             expert.setExpert(resultSet.getString("expert"));
-    //             expert.setCreatedAt(resultSet.getTimestamp("created_at"));
-    //             expert.setUpdatedAt(resultSet.getTimestamp("updated_at"));
-    //             experts.add(expert);
-    //         }
+            while (resultSet.next()) {
+                Expert expert = new Expert();
+                expert.setId(resultSet.getInt("id"));
+                expert.setExpert(resultSet.getString("expert"));
+                expert.setCreatedAt(resultSet.getTimestamp("created_at"));
+                expert.setUpdatedAt(resultSet.getTimestamp("updated_at"));
+                experts.add(expert);
+            }
 
-    //         expertResponse.setExperts(experts);
-    //         expertResponse.setSqlResponse("Successfully");
-    //         expertResponse.setSqlExecute(true);
-    //     } catch (SQLException e) {
-    //         e.printStackTrace(System.err);
-    //         expertResponse.setSqlResponse(e.getMessage());
-    //         expertResponse.setSqlExecute(false);
-    //     }
+            expertResponse.setExperts(experts);
+            expertResponse.setSqlResponse("Successfully");
+            expertResponse.setSqlExecute(true);
+        } catch (SQLException e) {
+            e.printStackTrace(System.err);
+            expertResponse.setSqlResponse(e.getMessage());
+            expertResponse.setSqlExecute(false);
+        }
 
-    //     return expertResponse;
-    // }
+        return expertResponse;
+    }
 
     public ExpertResponse save(Expert expert) {
         try {

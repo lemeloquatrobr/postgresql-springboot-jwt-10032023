@@ -20,15 +20,15 @@ public class ExpertController {
 
     ExpertService expertService = new ExpertService();
 
-    // @GetMapping
-    // public ResponseEntity<ExpertResponse> index() {
-    //     ExpertResponse expertResponse = expertService.index();
-    //     if (expertResponse.getSqlExecute()) {
-    //         return new ResponseEntity<ExpertResponse>(expertResponse, HttpStatus.OK);
-    //     } else {
-    //         return new ResponseEntity<ExpertResponse>(expertResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-    //     }
-    // }
+    @GetMapping
+    public ResponseEntity<ExpertResponse> index() {
+        ExpertResponse expertResponse = expertService.index();
+        if (expertResponse.getSqlExecute()) {
+            return new ResponseEntity<ExpertResponse>(expertResponse, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<ExpertResponse>(expertResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @PostMapping
     public ResponseEntity<ExpertResponse> store(@RequestBody Expert expert) {

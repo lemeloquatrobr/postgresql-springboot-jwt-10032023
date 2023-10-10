@@ -8,9 +8,9 @@ public class ExpertService {
 
     ExpertRepository expertRepository = new ExpertRepository();
 
-    // public ExpertResponse index() {
-    //     return expertRepository.findAll();
-    // }
+    public ExpertResponse index() {
+        return expertRepository.findAll();
+    }
 
     public ExpertResponse store(Expert expert) {
         return expertRepository.save(expert);
